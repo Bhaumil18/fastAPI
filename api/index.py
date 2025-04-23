@@ -5,6 +5,8 @@ from app.routes.csv_upload_route import csv_upload_router
 from app.routes.filters_route import filterRouter
 from app.routes.inventory_router import invRouter
 
+from app.services.filters_service import get_Distinct_Filters
+
 app = FastAPI(title="Analysis App")
 
 app.add_middleware(
@@ -18,6 +20,10 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"msg": "FastAPI is running on Vercel!"}
+
+@app.get("/distinct")
+def getGilter():
+    return get_Distinct_Filters()
 
 
 app.include_router(csv_upload_router, prefix="/upload")
